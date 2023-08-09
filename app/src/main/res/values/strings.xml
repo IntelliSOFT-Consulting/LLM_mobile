@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Llm</string>
+
+    <string name="base_url">https://devhmis.intellisoftkenya.com/api/</string>
+
+
+    <string name="sign_up">Enter your information to get your account ready.</string>
+    <string name="sign_in">Enter your phone number to sign in, we\'ll send you a code for verification.</string>
+    <string name="reset_password">Enter your phone number to reset your password, well send you a code for verification.</string>
+    <string name="verify">We\'ve sent a 4 digit verification code. Enter it below to verify.</string>
+
+    <string-array name="array_gender">
+        <item>Male</item>
+        <item>Female</item>
+        <item>I\'d rather not say</item>
+    </string-array>
+
+    <string-array name="array_location">
+        <item>University</item>
+        <item>Mall</item>
+        <item>Market</item>
+    </string-array>
+
+</resources>
