@@ -6,16 +6,21 @@ enum class UrlData(var message: Int) {
     BASE_URL(R.string.base_url),
 }
 
-data class DbSignUp(
-    val uniqueID:String,
-    val age:String,
-    val gender:String,
-    val phoneNumber:String,
-    val signUpDate:String,
-    val heardAppFrom:String,
-    val username:String, //this is the email address
+data class DbSignIn(
+    val username:String,
     val password:String,
-    val roles:List<DbRoles>,
+)
+
+data class DbSignUp(
+    var uniqueID:String,
+    var age:String,
+    var gender:String,
+    var phoneNumber:String,
+    var signUpDate:String,
+    var heardAppFrom:String,
+    var username:String, //this is the email address
+    var password:String,
+    var roles:List<DbRoles>,
 )
 data class DbRoles(
     val name:String

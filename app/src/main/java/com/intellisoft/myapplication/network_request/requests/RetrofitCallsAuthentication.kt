@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.widget.Toast
+import com.intellisoft.myapplication.data_class.DbSignIn
 import com.intellisoft.myapplication.data_class.DbSignUp
 import com.intellisoft.myapplication.data_class.UrlData
 import com.intellisoft.myapplication.helper_class.FormatterClassHelper
@@ -17,26 +18,24 @@ import org.json.JSONObject
 
 class RetrofitCallsAuthentication {
 
-    fun loginUser(context: Context, dbSignUp: DbSignUp){
+    fun registerUser(context: Context, dbSignUp: DbSignUp){
 
         CoroutineScope(Dispatchers.Main).launch {
 
             val job = Job()
             CoroutineScope(Dispatchers.IO + job).launch {
-
-                startLogin(context, dbSignUp)
-
+                startRegister(context, dbSignUp)
             }.join()
         }
 
     }
-    private suspend fun startLogin(context: Context, dbSignUp: DbSignUp) {
+    private suspend fun startRegister(context: Context, dbSignUp: DbSignUp) {
 
 
         val job1 = Job()
         CoroutineScope(Dispatchers.Main + job1).launch {
 
-            var progressDialog = ProgressDialog(context)
+            val progressDialog = ProgressDialog(context)
             progressDialog.setTitle("Please wait..")
             progressDialog.setMessage("Authentication in progress..")
             progressDialog.setCanceledOnTouchOutside(false)
@@ -62,7 +61,86 @@ class RetrofitCallsAuthentication {
                             if (body != null){
 
                                 val token = body.token
-//                                val expires = body.expires
+
+                                formatter.saveSharedPreference(context, "token", token)
+//                                formatter.saveSharedPreference(context, "expires", expires)
+
+                                formatter.deleteSharedPreference(context, "dbSignUp")
+                            }else{
+                                messageToast = "Error: Body is null"
+                            }
+                        }else{
+                            messageToast = "Error: The request was not successful"
+                        }
+                    }else{
+                        apiInterface.errorBody()?.let {
+                            val errorBody = JSONObject(it.string())
+                            messageToast = errorBody.getString("message")
+                        }
+                    }
+
+
+                }catch (e: Exception){
+
+                    messageToast = "There was an issue with the server"
+                }
+
+
+            }.join()
+            CoroutineScope(Dispatchers.Main).launch{
+
+                progressDialog.dismiss()
+                Toast.makeText(context, messageToast, Toast.LENGTH_LONG).show()
+
+            }
+
+        }
+
+    }
+
+    fun loginUser(context: Context, dbSignIn: DbSignIn){
+
+        CoroutineScope(Dispatchers.Main).launch {
+
+            val job = Job()
+            CoroutineScope(Dispatchers.IO + job).launch {
+                starLogin(context, dbSignIn)
+            }.join()
+        }
+
+    }
+    private suspend fun starLogin(context: Context, dbSignIn: DbSignIn) {
+
+
+        val job1 = Job()
+        CoroutineScope(Dispatchers.Main + job1).launch {
+
+            val progressDialog = ProgressDialog(context)
+            progressDialog.setTitle("Please wait..")
+            progressDialog.setMessage("Authentication in progress..")
+            progressDialog.setCanceledOnTouchOutside(false)
+            progressDialog.show()
+
+            var messageToast = ""
+            val job = Job()
+            CoroutineScope(Dispatchers.IO + job).launch {
+
+                val formatter = FormatterClassHelper()
+                val baseUrl = context.getString(UrlData.BASE_URL.message)
+                val apiService = RetrofitBuilder.getRetrofit(baseUrl).create(Interface::class.java)
+                try {
+
+                    val apiInterface = apiService.signInUser(dbSignIn)
+                    if (apiInterface.isSuccessful){
+
+                        val statusCode = apiInterface.code()
+                        val body = apiInterface.body()
+
+                        if (statusCode == 200 || statusCode == 201){
+
+                            if (body != null){
+
+                                val token = body.token
 
                                 formatter.saveSharedPreference(context, "token", token)
 //                                formatter.saveSharedPreference(context, "expires", expires)
@@ -70,13 +148,9 @@ class RetrofitCallsAuthentication {
                             }else{
                                 messageToast = "Error: Body is null"
                             }
-
                         }else{
                             messageToast = "Error: The request was not successful"
                         }
-
-
-
                     }else{
                         apiInterface.errorBody()?.let {
                             val errorBody = JSONObject(it.string())

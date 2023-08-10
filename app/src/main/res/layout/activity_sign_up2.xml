@@ -141,7 +141,7 @@
                 </LinearLayout>
 
                 <EditText
-                    android:inputType="phone"
+                    android:id="@+id/etSpecificLocation"
                     android:layout_marginTop="5dp"
                     android:hint="Enter a specific location"
                     android:background="@drawable/edit_text_border"
@@ -179,7 +179,7 @@
                 </LinearLayout>
 
                 <EditText
-                    android:inputType="phone"
+                    android:id="@+id/etAboutUs"
                     android:layout_marginTop="5dp"
                     android:hint="How did you get to learn about the app?"
                     android:background="@drawable/edit_text_border"
@@ -217,6 +217,7 @@
                 </LinearLayout>
 
                 <EditText
+                    android:id="@+id/etPassword"
                     android:inputType="textPassword"
                     android:layout_marginTop="5dp"
                     android:hint="Enter your password"
@@ -255,6 +256,7 @@
                 </LinearLayout>
 
                 <EditText
+                    android:id="@+id/etConfirmPassword"
                     android:inputType="textPassword"
                     android:layout_marginTop="5dp"
                     android:hint="Enter your password"
@@ -277,6 +279,7 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/btnSignUp"
             android:backgroundTint="@color/button"
             android:text="Complete sign up"
             android:layout_width="match_parent"
