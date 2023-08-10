@@ -25,6 +25,7 @@ class SignUp1 : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private lateinit var etFullName:EditText
     private lateinit var etPhoneNumber:EditText
     private lateinit var etAge:EditText
+    private lateinit var etEmailAddress:EditText
 
     private lateinit var spinnerGender:Spinner
 
@@ -39,6 +40,7 @@ class SignUp1 : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         etFullName = findViewById(R.id.etFullName)
         etPhoneNumber = findViewById(R.id.etPhoneNumber)
         etAge = findViewById(R.id.etAge)
+        etEmailAddress = findViewById(R.id.etEmailAddress)
 
 
         initSpinner()
@@ -52,36 +54,47 @@ class SignUp1 : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             val fullName = etFullName.text.toString()
             val phoneNumber = etPhoneNumber.text.toString()
             val age = etAge.text.toString()
+            val emailAddress = etEmailAddress.text.toString()
 
             if (!TextUtils.isEmpty(fullName) &&
                 !TextUtils.isEmpty(phoneNumber) &&
                 !TextUtils.isEmpty(age) &&
+                !TextUtils.isEmpty(emailAddress) &&
                 gender != ""){
 
-                val todayDate = formatterHelper.getTodayDate()
+                if (formatterHelper.validateEmail(emailAddress)){
 
-                val dbSignUp = DbSignUp(
-                    phoneNumber,
-                    age,
-                    gender.toString(),
-                    phoneNumber,
-                    todayDate,
-                    "",
-                    "",
-                    "",
-                    Collections.emptyList())
+                    val todayDate = formatterHelper.getTodayDate()
 
-                val json = Gson().toJson(dbSignUp)
-                formatterHelper.saveSharedPreference(this, "dbSignUp", json)
+                    val dbSignUp = DbSignUp(
+                        phoneNumber,
+                        age,
+                        gender.toString(),
+                        phoneNumber,
+                        todayDate,
+                        "",
+                        emailAddress,
+                        "",
+                        Collections.emptyList())
 
-                val intent = Intent(this, SignUp2::class.java)
-                startActivity(intent)
+                    val json = Gson().toJson(dbSignUp)
+                    formatterHelper.saveSharedPreference(this, "dbSignUp", json)
+
+                    val intent = Intent(this, SignUp2::class.java)
+                    startActivity(intent)
+
+                }else{
+                    etEmailAddress.error = "Enter a valid email address"
+                }
+
+
 
             }else{
 
                 if (TextUtils.isEmpty(fullName)) etFullName.error = "Enter your name"
                 if (TextUtils.isEmpty(phoneNumber)) etPhoneNumber.error = "Enter your phone number"
                 if (TextUtils.isEmpty(age)) etAge.error = "Enter your age"
+                if (TextUtils.isEmpty(emailAddress)) etEmailAddress.error = "Enter your email address"
                 if (gender == "") Toast.makeText(this, "Please select your gender", Toast.LENGTH_LONG).show()
 
             }
