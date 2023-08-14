@@ -1,6 +1,9 @@
 package com.intellisoft.myapplication.helper_class
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.widget.TextView
 import com.intellisoft.myapplication.R
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -10,6 +13,8 @@ class FormatterClassHelper {
 
     private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
+
+
     fun validateEmail(emailAddress: String):Boolean{
         return emailAddress.matches(emailPattern.toRegex())
     }
@@ -18,7 +23,7 @@ class FormatterClassHelper {
         return formatter.parse(date)
     }
     fun getTodayDate(): String {
-        val formatter = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.ENGLISH)
+        val formatter = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
         val date = Date()
         return formatter.format(date)
     }
@@ -67,6 +72,18 @@ class FormatterClassHelper {
         stringStringMap["Authorization"] = " Bearer $accessToken"
 
         return stringStringMap
+    }
+
+    fun logOut(context: Context) {
+
+        deleteSharedPreference(context, "token")
+        deleteSharedPreference(context, "age")
+        deleteSharedPreference(context, "gender")
+        deleteSharedPreference(context, "username")
+        deleteSharedPreference(context, "signUpDate")
+        deleteSharedPreference(context, "contact")
+        deleteSharedPreference(context, "isLoggedIn")
+
     }
 
 }

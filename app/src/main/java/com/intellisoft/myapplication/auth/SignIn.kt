@@ -38,11 +38,7 @@ class SignIn : AppCompatActivity() {
             if (!TextUtils.isEmpty(emailAddress) && !TextUtils.isEmpty(password)){
 
                 val dbSignIn = DbSignIn(emailAddress, password)
-
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-
-//                retrofitCallsAuthentication.loginUser(this, dbSignIn)
+                retrofitCallsAuthentication.loginUser(this, dbSignIn)
 
             }else{
                 if (TextUtils.isEmpty(emailAddress)) etEmailAddress.error = "Email address cannot be null.."

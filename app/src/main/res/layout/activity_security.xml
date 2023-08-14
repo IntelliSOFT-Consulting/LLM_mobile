@@ -89,7 +89,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:layout_marginTop="50dp"
                     android:textAllCaps="false"
-                    android:text="Rest password"
+                    android:text="Reset password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

@@ -151,9 +151,10 @@
             android:layout_height="wrap_content">
 
             <Button
+                android:textAllCaps="false"
                 android:id="@+id/btnSendCode"
                 android:layout_marginTop="20dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:backgroundTint="@color/button"
                 android:text="Send Code"
                 android:layout_width="match_parent"

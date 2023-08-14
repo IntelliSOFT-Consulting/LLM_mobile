@@ -1,9 +1,13 @@
 package com.intellisoft.myapplication.network_request.requests
 
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.widget.Toast
+import com.intellisoft.myapplication.MainActivity
+import com.intellisoft.myapplication.auth.SignIn
 import com.intellisoft.myapplication.data_class.DbSignIn
 import com.intellisoft.myapplication.data_class.DbSignUp
 import com.intellisoft.myapplication.data_class.UrlData
@@ -62,8 +66,11 @@ class RetrofitCallsAuthentication {
 
                                 val token = body.token
 
-                                formatter.saveSharedPreference(context, "token", token)
-//                                formatter.saveSharedPreference(context, "expires", expires)
+                                messageToast = "Registration was successful.."
+
+                                formatter.saveSharedPreference(context, "registrationToken", token)
+                                val intent = Intent(context, SignIn::class.java)
+                                context.startActivity(intent)
 
                                 formatter.deleteSharedPreference(context, "dbSignUp")
                             }else{
@@ -73,14 +80,19 @@ class RetrofitCallsAuthentication {
                             messageToast = "Error: The request was not successful"
                         }
                     }else{
-                        apiInterface.errorBody()?.let {
-                            val errorBody = JSONObject(it.string())
-                            messageToast = errorBody.getString("message")
+                        val statusCode = apiInterface.code()
+                        if (statusCode == 401){
+                            messageToast = "Authentication failed. Try again."
                         }
+
                     }
 
 
                 }catch (e: Exception){
+
+                    e.printStackTrace()
+
+
 
                     messageToast = "There was an issue with the server"
                 }
@@ -130,7 +142,13 @@ class RetrofitCallsAuthentication {
                 val apiService = RetrofitBuilder.getRetrofit(baseUrl).create(Interface::class.java)
                 try {
 
-                    val apiInterface = apiService.signInUser(dbSignIn)
+                    val registrationToken = formatter.retrieveSharedPreference(context, "registrationToken")
+                    var token = ""
+                    if (registrationToken != null){
+                        token = registrationToken
+                    }
+
+                    val apiInterface = apiService.signInUser(token, dbSignIn)
                     if (apiInterface.isSuccessful){
 
                         val statusCode = apiInterface.code()
@@ -140,10 +158,29 @@ class RetrofitCallsAuthentication {
 
                             if (body != null){
 
-                                val token = body.token
+                                val tokenLogin = body.token
+                                val age = body.age
+                                val gender = body.gender
+                                val username = body.username
+                                val signUpDate = body.signUpDate
+                                val contact = body.contact
 
-                                formatter.saveSharedPreference(context, "token", token)
-//                                formatter.saveSharedPreference(context, "expires", expires)
+                                formatter.saveSharedPreference(context, "token", tokenLogin)
+                                formatter.saveSharedPreference(context, "age", age.toString())
+                                formatter.saveSharedPreference(context, "gender", gender)
+                                formatter.saveSharedPreference(context, "username", username)
+                                formatter.saveSharedPreference(context, "signUpDate", signUpDate)
+                                formatter.saveSharedPreference(context, "contact", contact)
+                                formatter.saveSharedPreference(context, "isLoggedIn", "true")
+
+                                messageToast = "Login successful.."
+
+                                val intent = Intent(context, MainActivity::class.java)
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                                context.startActivity(intent)
+                                if (context is Activity) {
+                                    context.finish()
+                                }
 
                             }else{
                                 messageToast = "Error: Body is null"
@@ -161,7 +198,12 @@ class RetrofitCallsAuthentication {
 
                 }catch (e: Exception){
 
-                    messageToast = "There was an issue with the server"
+                    Log.e("******","")
+                    Log.e("******",e.toString())
+                    Log.e("******","")
+
+
+                    messageToast = "Cannot login user.."
                 }
 
 

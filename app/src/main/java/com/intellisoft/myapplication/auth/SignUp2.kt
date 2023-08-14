@@ -67,6 +67,9 @@ class SignUp2 : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     dbSignUp.password = password
                     dbSignUp.roles = rolesList
 
+                    val age = dbSignUp.age.toInt()
+                    dbSignUp.age = age
+
                     retrofitCallsAuthentication.registerUser(this, dbSignUp)
 
                 }else{

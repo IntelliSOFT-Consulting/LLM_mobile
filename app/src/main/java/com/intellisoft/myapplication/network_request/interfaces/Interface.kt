@@ -16,7 +16,10 @@ interface Interface {
 
 
     @POST("api/authentication/login")
-    suspend fun signInUser(@Body dbSignIn: DbSignIn): Response<DbSignUpResponse>
+    suspend fun signInUser(
+        @Header("Authorization") token: String, // Add this line to pass the Bearer Token
+        @Body dbSignIn: DbSignIn):
+            Response<DbSignUpResponse>
 
 
 

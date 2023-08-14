@@ -68,7 +68,7 @@ class SignUp1 : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
                     val dbSignUp = DbSignUp(
                         phoneNumber,
-                        age,
+                        age.toInt(),
                         gender.toString(),
                         phoneNumber,
                         todayDate,
