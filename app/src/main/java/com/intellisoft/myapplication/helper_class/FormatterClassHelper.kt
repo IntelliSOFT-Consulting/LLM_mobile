@@ -6,6 +6,7 @@ import android.content.Intent
 import android.widget.TextView
 import com.intellisoft.myapplication.R
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
@@ -13,14 +14,30 @@ class FormatterClassHelper {
 
     private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
+    fun getGreetingByTime(context: Context): String {
+        val calendar = Calendar.getInstance()
 
+        var name = ""
+        val userName = retrieveSharedPreference(context, "username")
+        if (userName != null){
+            name = userName
+        }
+
+        return when (calendar.get(Calendar.HOUR_OF_DAY)) {
+            in 0..11 -> "Good morning $name"
+            in 12..16 -> "Good afternoon $name"
+            in 17..20 -> "Good evening $name"
+            else -> "Good night $name"
+        }
+    }
 
     fun validateEmail(emailAddress: String):Boolean{
         return emailAddress.matches(emailPattern.toRegex())
     }
-    fun convertDdMMyyyy(date: String): Date {
-        val formatter = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
-        return formatter.parse(date)
+    fun getDate(): String {
+        val formatter = SimpleDateFormat("E, d MMM yyyy")
+        val date = Date()
+        return formatter.format(date)
     }
     fun getTodayDate(): String {
         val formatter = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)

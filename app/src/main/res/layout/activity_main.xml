@@ -9,6 +9,7 @@
 
 
     <LinearLayout
+        android:id="@+id/linear"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -25,6 +26,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/tvGreetings"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -33,6 +35,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
+                    android:id="@+id/tvDate"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:text="Sun, 13 Aug 2023"
                     android:layout_width="match_parent"
@@ -73,227 +76,235 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <ScrollView
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_below="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:layout_gravity="center"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
-                <TableLayout
-                    android:layout_gravity="center"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <TableRow
+                    android:layout_marginTop="20dp">
 
-                    <TableRow
-                        android:layout_marginTop="20dp">
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="220dp">
 
-                        <LinearLayout
-                            android:layout_weight="1"
-                            android:orientation="vertical"
+                        <androidx.cardview.widget.CardView
+                            android:clickable="true"
+                            app:cardCornerRadius="10dp"
                             android:layout_width="wrap_content"
-                            android:layout_height="220dp">
+                            android:layout_height="wrap_content">
 
-                            <androidx.cardview.widget.CardView
-                                android:clickable="true"
-                                app:cardCornerRadius="10dp"
+                            <ImageView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
+                                android:layout_height="183dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/running" />
 
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="183dp"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/running" />
+                        </androidx.cardview.widget.CardView>
 
-                            </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:text="Running"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
 
-                            <TextView
-                                android:layout_marginTop="10dp"
-                                android:textStyle="bold"
-                                android:textColor="@color/black"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                                android:text="Running"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="220dp">
 
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_marginStart="10dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
+                        <androidx.cardview.widget.CardView
+                            android:clickable="true"
+                            app:cardCornerRadius="10dp"
                             android:layout_width="wrap_content"
-                            android:layout_height="220dp">
+                            android:layout_height="183dp">
 
-                            <androidx.cardview.widget.CardView
-                                android:clickable="true"
-                                app:cardCornerRadius="10dp"
+                            <ImageView
                                 android:layout_width="wrap_content"
-                                android:layout_height="183dp">
+                                android:layout_height="wrap_content"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/food" />
 
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/food" />
+                        </androidx.cardview.widget.CardView>
 
-                            </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:text="Diet"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
 
-                            <TextView
-                                android:layout_marginTop="10dp"
-                                android:textStyle="bold"
-                                android:textColor="@color/black"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                                android:text="Diet"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
+                    </LinearLayout>
 
-                        </LinearLayout>
+                </TableRow>
 
-                    </TableRow>
+                <TableRow
+                    android:layout_marginTop="20dp">
 
-                    <TableRow
-                        android:layout_marginTop="20dp">
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="220dp">
 
-                        <LinearLayout
-                            android:layout_weight="1"
-                            android:orientation="vertical"
+                        <androidx.cardview.widget.CardView
+                            android:clickable="true"
+                            app:cardCornerRadius="10dp"
                             android:layout_width="wrap_content"
-                            android:layout_height="220dp">
+                            android:layout_height="wrap_content">
 
-                            <androidx.cardview.widget.CardView
-                                android:clickable="true"
-                                app:cardCornerRadius="10dp"
+                            <ImageView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
+                                android:layout_height="183dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/smoking" />
 
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="183dp"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/smoking" />
+                        </androidx.cardview.widget.CardView>
 
-                            </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:text="Smoking and Drugs"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
 
-                            <TextView
-                                android:layout_marginTop="10dp"
-                                android:textStyle="bold"
-                                android:textColor="@color/black"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                                android:text="Smoking and Drugs"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="220dp">
 
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_marginStart="10dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
+                        <androidx.cardview.widget.CardView
+                            android:clickable="true"
+                            app:cardCornerRadius="10dp"
                             android:layout_width="wrap_content"
-                            android:layout_height="220dp">
+                            android:layout_height="183dp">
 
-                            <androidx.cardview.widget.CardView
-                                android:clickable="true"
-                                app:cardCornerRadius="10dp"
+                            <ImageView
                                 android:layout_width="wrap_content"
-                                android:layout_height="183dp">
+                                android:layout_height="wrap_content"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/heart" />
 
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/heart" />
+                        </androidx.cardview.widget.CardView>
 
-                            </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:text="Heart"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
 
-                            <TextView
-                                android:layout_marginTop="10dp"
-                                android:textStyle="bold"
-                                android:textColor="@color/black"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                                android:text="Heart"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
+                    </LinearLayout>
 
-                        </LinearLayout>
+                </TableRow>
 
-                    </TableRow>
+                <TableRow
+                    android:layout_marginTop="20dp">
 
-                    <TableRow
-                        android:layout_marginTop="20dp"
-                        >
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="220dp">
 
-                        <LinearLayout
-                            android:layout_weight="1"
-                            android:orientation="vertical"
+                        <androidx.cardview.widget.CardView
+                            android:clickable="true"
+                            app:cardCornerRadius="10dp"
                             android:layout_width="wrap_content"
-                            android:layout_height="220dp">
+                            android:layout_height="wrap_content">
 
-                            <androidx.cardview.widget.CardView
-                                android:clickable="true"
-                                app:cardCornerRadius="10dp"
+                            <ImageView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
+                                android:layout_height="183dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/stress" />
 
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="183dp"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/stress" />
+                        </androidx.cardview.widget.CardView>
 
-                            </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:text="Stress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
 
-                            <TextView
-                                android:layout_marginTop="10dp"
-                                android:textStyle="bold"
-                                android:textColor="@color/black"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                                android:text="Stress"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="220dp">
 
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_marginStart="10dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
+                        <androidx.cardview.widget.CardView
+                            android:clickable="false"
+                            app:cardCornerRadius="10dp"
                             android:layout_width="wrap_content"
-                            android:layout_height="220dp">
+                            android:layout_height="183dp">
 
-                            <androidx.cardview.widget.CardView
-                                android:clickable="false"
-                                app:cardCornerRadius="10dp"
+                            <ImageView
                                 android:layout_width="wrap_content"
-                                android:layout_height="183dp">
+                                android:layout_height="wrap_content"
+                                android:scaleType="centerCrop"
+                                />
 
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:scaleType="centerCrop"
-                                    />
+                        </androidx.cardview.widget.CardView>
 
-                            </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:text=""
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
 
-                            <TextView
-                                android:layout_marginTop="10dp"
-                                android:textStyle="bold"
-                                android:textColor="@color/black"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                                android:text=""
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
+                    </LinearLayout>
 
-                        </LinearLayout>
+                </TableRow>
 
-                    </TableRow>
-
-                </TableLayout>
-
-            </ScrollView>
-
+            </TableLayout>
 
 
         </LinearLayout>
 
-    </LinearLayout>
+
+    </ScrollView>
+
 
 
 </RelativeLayout>
