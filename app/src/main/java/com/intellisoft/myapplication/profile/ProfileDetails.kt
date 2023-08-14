@@ -9,6 +9,7 @@ import android.view.Gravity
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -47,6 +48,15 @@ class ProfileDetails : AppCompatActivity() {
             startActivity(intent)
             finish()
 
+        }
+
+        findViewById<LinearLayout>(R.id.linearLocation).setOnClickListener {
+            val intent = Intent(this, Location::class.java)
+            startActivity(intent)
+        }
+        findViewById<LinearLayout>(R.id.linearSecurity).setOnClickListener {
+            val intent = Intent(this, Security::class.java)
+            startActivity(intent)
         }
 
         getUserDetails()

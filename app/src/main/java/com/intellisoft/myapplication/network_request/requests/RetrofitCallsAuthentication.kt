@@ -164,6 +164,7 @@ class RetrofitCallsAuthentication {
                                 val username = body.username
                                 val signUpDate = body.signUpDate
                                 val contact = body.contact
+                                val heardAppFrom = body.heardAppFrom
 
                                 formatter.saveSharedPreference(context, "token", tokenLogin)
                                 formatter.saveSharedPreference(context, "age", age.toString())
@@ -171,6 +172,7 @@ class RetrofitCallsAuthentication {
                                 formatter.saveSharedPreference(context, "username", username)
                                 formatter.saveSharedPreference(context, "signUpDate", signUpDate)
                                 formatter.saveSharedPreference(context, "contact", contact)
+                                formatter.saveSharedPreference(context, "heardAppFrom", heardAppFrom)
                                 formatter.saveSharedPreference(context, "isLoggedIn", "true")
 
                                 messageToast = "Login successful.."

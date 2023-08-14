@@ -19,6 +19,7 @@
             android:layout_height="wrap_content">
 
             <ImageButton
+                android:id="@+id/imgBtnBack"
                 android:padding="20dp"
                 android:background="@drawable/ic_action_back"
                 android:layout_width="wrap_content"
@@ -49,10 +50,11 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:id="@+id/tvLocation"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:text="Location"
+                android:text=""
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -78,10 +80,11 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:id="@+id/tvSpecificLocation"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:text="Masai Market"
+                android:text=""
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
