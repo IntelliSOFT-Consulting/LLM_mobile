@@ -226,6 +226,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:id="@+id/tvDeleteAccount"
                 android:textColor="@color/red"
                 android:padding="10dp"
                 android:gravity="center"
@@ -236,6 +237,11 @@
 
         </LinearLayout>
 
+
+
     </LinearLayout>
+
+
+
 
 </RelativeLayout>
