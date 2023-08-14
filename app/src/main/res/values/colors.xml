@@ -6,6 +6,8 @@
     <color name="primary">#0D1C2C</color>
     <color name="red">#DA1717</color>
     <color name="button">#C0E863</color>
+    <color name="text_color">#0B65C2</color>
+    <color name="darker_gray">#14000000</color>
 </resources>
 
 

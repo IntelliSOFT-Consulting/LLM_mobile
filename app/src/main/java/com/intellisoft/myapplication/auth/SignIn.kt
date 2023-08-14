@@ -7,10 +7,12 @@ import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import com.intellisoft.myapplication.MainActivity
 import com.intellisoft.myapplication.R
 import com.intellisoft.myapplication.data_class.DbSignIn
 import com.intellisoft.myapplication.helper_class.FormatterClassHelper
 import com.intellisoft.myapplication.network_request.requests.RetrofitCallsAuthentication
+import org.w3c.dom.Text
 
 class SignIn : AppCompatActivity() {
 
@@ -36,7 +38,11 @@ class SignIn : AppCompatActivity() {
             if (!TextUtils.isEmpty(emailAddress) && !TextUtils.isEmpty(password)){
 
                 val dbSignIn = DbSignIn(emailAddress, password)
-                retrofitCallsAuthentication.loginUser(this, dbSignIn)
+
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+
+//                retrofitCallsAuthentication.loginUser(this, dbSignIn)
 
             }else{
                 if (TextUtils.isEmpty(emailAddress)) etEmailAddress.error = "Email address cannot be null.."
@@ -49,11 +55,8 @@ class SignIn : AppCompatActivity() {
             val intent = Intent(this, SignUp1::class.java)
             startActivity(intent)
         }
-        findViewById<Button>(R.id.btnSendCode).setOnClickListener {
-            val intent = Intent(this, VerificationCode::class.java)
-            startActivity(intent)
-        }
-        findViewById<Button>(R.id.tvForgotPassword).setOnClickListener {
+
+        findViewById<TextView>(R.id.tvForgotPassword).setOnClickListener {
             val intent = Intent(this, ForgotPassword::class.java)
             startActivity(intent)
         }
