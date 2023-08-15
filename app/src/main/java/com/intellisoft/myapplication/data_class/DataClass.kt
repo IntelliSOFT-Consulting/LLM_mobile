@@ -1,10 +1,18 @@
 package com.intellisoft.myapplication.data_class
 
 import com.intellisoft.myapplication.R
+import java.time.LocalDateTime
 
 enum class UrlData(var message: Int) {
     BASE_URL(R.string.base_url),
 }
+
+data class DbUpdateMetadata(
+    val searchSubject: String,
+    val observedTimeStartUse: String,
+    val observedTimeLastUse: String,
+    val durationOfEngagement: String,
+)
 
 data class DbNCDs(
     val imageResource: Int,

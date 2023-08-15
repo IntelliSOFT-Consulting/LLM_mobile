@@ -2,16 +2,17 @@ package com.intellisoft.myapplication.chat
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.intellisoft.myapplication.R
@@ -24,7 +25,6 @@ import com.intellisoft.myapplication.network_request.requests.RetrofitCallsAuthe
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.LinkedList
 
 class Chat : AppCompatActivity() {
 
@@ -42,6 +42,7 @@ class Chat : AppCompatActivity() {
     val dbChatList = ArrayList<DbChat>()
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
@@ -79,8 +80,15 @@ class Chat : AppCompatActivity() {
             }
         }
 
+        updateMetadata()
 
 
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun updateMetadata() {
+        val localDateTime = formatterHelper.getLocalTime()
+        formatterHelper.saveSharedPreference(this, "observedTimeStartUse", localDateTime.toString())
     }
 
     private fun setVisibility(isSend: Boolean){
@@ -165,5 +173,16 @@ class Chat : AppCompatActivity() {
             recyclerView.adapter = chatAdapter
         }
 
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onDestroy() {
+        super.onDestroy()
+        formatterHelper.updateMetaData(this)
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onStop() {
+        super.onStop()
+        formatterHelper.updateMetaData(this)
     }
 }

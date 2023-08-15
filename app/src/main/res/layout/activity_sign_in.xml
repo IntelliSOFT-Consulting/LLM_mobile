@@ -156,7 +156,7 @@
                 android:layout_marginTop="20dp"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/button"
-                android:text="Send Code"
+                android:text="Login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

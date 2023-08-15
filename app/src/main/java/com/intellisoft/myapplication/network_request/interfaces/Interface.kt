@@ -6,6 +6,7 @@ import com.intellisoft.myapplication.data_class.DbProfile
 import com.intellisoft.myapplication.data_class.DbSignIn
 import com.intellisoft.myapplication.data_class.DbSignUp
 import com.intellisoft.myapplication.data_class.DbSignUpResponse
+import com.intellisoft.myapplication.data_class.DbUpdateMetadata
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
@@ -24,12 +25,6 @@ interface Interface {
         @Body dbSignIn: DbSignIn):
             Response<DbSignUpResponse>
 
-    @POST("api/llm/askChatGpt")
-    suspend fun requestLLMChat(
-        @Header("Authorization") token: String, // Add this line to pass the Bearer Token
-        @Body dbLLM: DbLLM
-    ): Response<DbLLMResponse>
-
     @POST("api/authentication/updateProfile")
     suspend fun updateUserData(
         @Header("Authorization") token: String, // Add this line to pass the Bearer Token
@@ -41,6 +36,20 @@ interface Interface {
         @Header("Authorization") token: String, // Add this line to pass the Bearer Token
         @Field("username") username: String,
         @Field("password") password: String
+    ): Response<Any>
+
+
+    @POST("api/llm/askChatGpt")
+    suspend fun requestLLMChat(
+        @Header("Authorization") token: String, // Add this line to pass the Bearer Token
+        @Body dbLLM: DbLLM
+    ): Response<DbLLMResponse>
+
+    @POST("api/llm/askChatGpt/updateMetaData/{phoneNumber}")
+    suspend fun updateMetaData(
+        @Header("Authorization") token: String, // Add this line to pass the Bearer Token
+        @Body dbUpdateMetadata: DbUpdateMetadata,
+        @Path("phoneNumber") phoneNumber: String,
     ): Response<Any>
 
 

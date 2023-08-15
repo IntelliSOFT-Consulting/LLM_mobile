@@ -12,6 +12,7 @@ import com.intellisoft.myapplication.data_class.DbLLM
 import com.intellisoft.myapplication.data_class.DbProfile
 import com.intellisoft.myapplication.data_class.DbSignIn
 import com.intellisoft.myapplication.data_class.DbSignUp
+import com.intellisoft.myapplication.data_class.DbUpdateMetadata
 import com.intellisoft.myapplication.data_class.UrlData
 import com.intellisoft.myapplication.helper_class.FormatterClassHelper
 import com.intellisoft.myapplication.network_request.builder.RetrofitBuilder
@@ -410,6 +411,75 @@ class RetrofitCallsAuthentication {
                 Toast.makeText(context, messageToast, Toast.LENGTH_LONG).show()
 
             }
+
+        }
+
+    }
+
+
+    fun updateMetadata(context: Context, dbUpdateMetadata: DbUpdateMetadata){
+
+        CoroutineScope(Dispatchers.IO).launch {
+
+            val job = Job()
+            CoroutineScope(Dispatchers.IO + job).launch {
+                startUpdateMetadata(context, dbUpdateMetadata)
+            }.join()
+        }
+
+    }
+    private suspend fun startUpdateMetadata(context: Context, dbUpdateMetadata: DbUpdateMetadata) {
+
+        val job1 = Job()
+        CoroutineScope(Dispatchers.Main + job1).launch {
+
+            val job = Job()
+            CoroutineScope(Dispatchers.IO + job).launch {
+
+                val formatter = FormatterClassHelper()
+                val baseUrl = context.getString(UrlData.BASE_URL.message)
+                val apiService = RetrofitBuilder.getRetrofit(baseUrl).create(Interface::class.java)
+                try {
+
+                    val registrationToken = formatter.retrieveSharedPreference(context, "token")
+                    val phoneNumber = formatter.retrieveSharedPreference(context, "contact")
+                    var token = ""
+                    if (registrationToken != null){
+                        token = registrationToken
+                    }
+
+                    val apiInterface = apiService.updateMetaData(token, dbUpdateMetadata, phoneNumber.toString())
+                    if (apiInterface.isSuccessful){
+
+
+                    }else{
+                        val statusCode = apiInterface.code()
+                        if (statusCode == 401){
+
+                            CoroutineScope(Dispatchers.Main).launch {
+                                Toast.makeText(context,"Please login.. Your session has expired",Toast.LENGTH_SHORT).show()
+                                val intent = Intent(context, SignIn::class.java)
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                                context.startActivity(intent)
+                                if (context is Activity) {
+                                    context.finish()
+                                }
+                            }
+
+
+                        }
+
+                    }
+
+
+                }catch (e: Exception){
+
+                    e.printStackTrace()
+                }
+
+
+            }.join()
+
 
         }
 
