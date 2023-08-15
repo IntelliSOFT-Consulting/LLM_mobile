@@ -2,6 +2,7 @@ package com.intellisoft.myapplication.network_request.interfaces
 
 import com.intellisoft.myapplication.data_class.DbLLM
 import com.intellisoft.myapplication.data_class.DbLLMResponse
+import com.intellisoft.myapplication.data_class.DbProfile
 import com.intellisoft.myapplication.data_class.DbSignIn
 import com.intellisoft.myapplication.data_class.DbSignUp
 import com.intellisoft.myapplication.data_class.DbSignUpResponse
@@ -14,7 +15,8 @@ interface Interface {
 
 
     @POST("api/authentication/register")
-    suspend fun signUpUser(@Body dbSignUp: DbSignUp): Response<DbSignUpResponse>
+    suspend fun signUpUser(@Body dbSignUp: DbSignUp):
+            Response<DbSignUpResponse>
 
     @POST("api/authentication/login")
     suspend fun signInUser(
@@ -26,8 +28,13 @@ interface Interface {
     suspend fun requestLLMChat(
         @Header("Authorization") token: String, // Add this line to pass the Bearer Token
         @Body dbLLM: DbLLM
-    ):
-            Response<DbLLMResponse>
+    ): Response<DbLLMResponse>
+
+    @POST("api/authentication/updateProfile")
+    suspend fun updateUserData(
+        @Header("Authorization") token: String, // Add this line to pass the Bearer Token
+        @Body dbProfile: DbProfile
+    ): Response<Any>
 
 
 

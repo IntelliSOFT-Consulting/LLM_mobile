@@ -56,6 +56,13 @@ data class DbSignUp(
     var password:String,
     var roles:List<DbRoles>,
 )
+data class DbProfile(
+    var age:Int,
+    var gender:String,
+    var contact:String,
+    var heardAppFrom:String,
+    var phoneNumber:String
+)
 data class DbRoles(
     val name:String
 )
