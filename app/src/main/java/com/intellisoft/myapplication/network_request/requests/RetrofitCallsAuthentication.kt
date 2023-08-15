@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import com.intellisoft.myapplication.landing_page.MainActivity
 import com.intellisoft.myapplication.auth.SignIn
+import com.intellisoft.myapplication.data_class.DbLLM
 import com.intellisoft.myapplication.data_class.DbSignIn
 import com.intellisoft.myapplication.data_class.DbSignUp
 import com.intellisoft.myapplication.data_class.UrlData
@@ -18,6 +19,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
 
 class RetrofitCallsAuthentication {
@@ -219,6 +221,39 @@ class RetrofitCallsAuthentication {
 
         }
 
+    }
+
+    fun searchLLm(context: Context, dbLLM: DbLLM) = runBlocking{
+        getLLM(context, dbLLM)
+    }
+    private suspend fun getLLM(context: Context, dbLLM: DbLLM): String?{
+        val formatter = FormatterClassHelper()
+        val baseUrl = context.getString(UrlData.BASE_URL.message)
+        val apiService = RetrofitBuilder.getRetrofit(baseUrl).create(Interface::class.java)
+        try {
+
+            val registrationToken = formatter.retrieveSharedPreference(context, "token")
+            var token = ""
+            if (registrationToken != null){
+                token = registrationToken
+            }
+
+            val apiInterface = apiService.requestLLMChat(token, dbLLM)
+            if (apiInterface.isSuccessful){
+                val statusCode = apiInterface.code()
+                val body = apiInterface.body()
+                if (statusCode == 200 && body !=null){
+                    val choices = body.choices
+                    for (choice in choices) {
+                        return choice.message.content
+                    }
+                }
+            }
+
+        }catch (e: java.lang.Exception){
+            e.printStackTrace()
+        }
+        return null
     }
 
 //    private suspend fun getUserData(context: Context) {
