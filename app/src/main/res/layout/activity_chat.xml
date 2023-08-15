@@ -61,7 +61,7 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:background="@drawable/heart"
+                        android:scaleType="centerCrop"
                         android:id="@+id/imageView"
                         android:layout_width="50dp"
                         android:layout_height="50dp"/>
@@ -79,14 +79,14 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textStyle="bold"
                         android:textColor="@color/black"
-                        android:text="Diet"
+                        android:text=""
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 
                     <TextView
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:id="@+id/tvSelectionDescription"
-                        android:text="Ask anything about diet."
+                        android:text=""
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 
@@ -139,6 +139,11 @@
                     android:layout_marginStart="10dp"
                     android:clickable="true"
                     android:background="@mipmap/ic_send_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 

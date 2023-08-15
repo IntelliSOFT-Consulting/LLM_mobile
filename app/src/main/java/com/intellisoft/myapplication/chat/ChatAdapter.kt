@@ -1,6 +1,7 @@
 package com.intellisoft.myapplication.chat
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,8 +48,8 @@ class ChatAdapter(private val dbChatList: ArrayList<DbChat>):
         holder.tvChat.text = chat
 
         if (username.contains("AI")){
-            holder.linearLayout.setBackgroundColor(R.color.darker_gray)
-            holder.tvChat.setTextColor(R.color.black)
+            holder.linearLayout.setBackgroundColor(Color.rgb(237,240,247))
+            holder.tvChat.setTextColor(Color.BLACK)
         }
 
 

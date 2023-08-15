@@ -6,6 +6,11 @@ enum class UrlData(var message: Int) {
     BASE_URL(R.string.base_url),
 }
 
+data class DbNCDs(
+    val imageResource: Int,
+    val imageName: String
+)
+
 data class DbLLMResponse(
     val choices:List<DbChoices>
 )
