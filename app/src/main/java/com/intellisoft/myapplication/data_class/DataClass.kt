@@ -6,6 +6,15 @@ enum class UrlData(var message: Int) {
     BASE_URL(R.string.base_url),
 }
 
+data class DbNcd(
+    val imageSource: Int,
+    val imageName:String
+)
+data class DbChat(
+    val username: String,
+    val chat: String
+)
+
 data class DbSignIn(
     val username:String,
     val password:String,

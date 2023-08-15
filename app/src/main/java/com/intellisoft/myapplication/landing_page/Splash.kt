@@ -1,10 +1,10 @@
-package com.intellisoft.myapplication
+package com.intellisoft.myapplication.landing_page
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import com.intellisoft.myapplication.auth.SignIn
+import com.intellisoft.myapplication.R
 import com.intellisoft.myapplication.auth.SignUp1
 import com.intellisoft.myapplication.helper_class.FormatterClassHelper
 

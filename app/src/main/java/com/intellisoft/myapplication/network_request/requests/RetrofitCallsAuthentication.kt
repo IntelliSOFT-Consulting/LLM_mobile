@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.widget.Toast
-import com.intellisoft.myapplication.MainActivity
+import com.intellisoft.myapplication.landing_page.MainActivity
 import com.intellisoft.myapplication.auth.SignIn
 import com.intellisoft.myapplication.data_class.DbSignIn
 import com.intellisoft.myapplication.data_class.DbSignUp

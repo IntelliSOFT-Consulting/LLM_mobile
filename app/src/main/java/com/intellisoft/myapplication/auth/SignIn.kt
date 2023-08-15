@@ -7,12 +7,10 @@ import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import com.intellisoft.myapplication.MainActivity
 import com.intellisoft.myapplication.R
 import com.intellisoft.myapplication.data_class.DbSignIn
 import com.intellisoft.myapplication.helper_class.FormatterClassHelper
 import com.intellisoft.myapplication.network_request.requests.RetrofitCallsAuthentication
-import org.w3c.dom.Text
 
 class SignIn : AppCompatActivity() {
 
