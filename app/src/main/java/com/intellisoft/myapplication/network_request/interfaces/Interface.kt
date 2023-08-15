@@ -36,6 +36,13 @@ interface Interface {
         @Body dbProfile: DbProfile
     ): Response<Any>
 
+    @POST("api/authentication/reset")
+    suspend fun resetPassword(
+        @Header("Authorization") token: String, // Add this line to pass the Bearer Token
+        @Field("username") username: String,
+        @Field("password") password: String
+    ): Response<Any>
+
 
 
 

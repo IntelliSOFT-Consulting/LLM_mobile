@@ -338,6 +338,84 @@ class RetrofitCallsAuthentication {
     }
 
 
+    fun passwordChange(context: Context, password: String, username: String){
+
+        CoroutineScope(Dispatchers.Main).launch {
+
+            val job = Job()
+            CoroutineScope(Dispatchers.IO + job).launch {
+                startPasswordChange(context, password, username)
+            }.join()
+        }
+
+    }
+    private suspend fun startPasswordChange(context: Context, password: String, username: String) {
+
+
+        val job1 = Job()
+        CoroutineScope(Dispatchers.Main + job1).launch {
+
+            val progressDialog = ProgressDialog(context)
+            progressDialog.setTitle("Please wait..")
+            progressDialog.setMessage("Authentication in progress..")
+            progressDialog.setCanceledOnTouchOutside(false)
+            progressDialog.show()
+
+            var messageToast = ""
+            val job = Job()
+            CoroutineScope(Dispatchers.IO + job).launch {
+
+                val formatter = FormatterClassHelper()
+                val baseUrl = context.getString(UrlData.BASE_URL.message)
+                val apiService = RetrofitBuilder.getRetrofit(baseUrl).create(Interface::class.java)
+                try {
+
+                    val registrationToken = formatter.retrieveSharedPreference(context, "token")
+                    var token = ""
+                    if (registrationToken != null){
+                        token = registrationToken
+                    }
+
+                    val apiInterface = apiService.resetPassword(token, username, password)
+                    if (apiInterface.isSuccessful){
+
+                        val statusCode = apiInterface.code()
+                        val body = apiInterface.body()
+
+                        if (statusCode == 200 || statusCode == 201){
+                            messageToast = "Update is successful.."
+                        }else{
+                            messageToast = "Error: The request was not successful"
+                        }
+                    }else{
+                        val statusCode = apiInterface.code()
+                        if (statusCode == 401){
+                            messageToast = "Authentication failed. Try again."
+                        }
+
+                    }
+
+
+                }catch (e: Exception){
+
+                    e.printStackTrace()
+                    messageToast = "There was an issue with the server"
+                }
+
+
+            }.join()
+            CoroutineScope(Dispatchers.Main).launch{
+
+                progressDialog.dismiss()
+                Toast.makeText(context, messageToast, Toast.LENGTH_LONG).show()
+
+            }
+
+        }
+
+    }
+
+
 
 
 }
