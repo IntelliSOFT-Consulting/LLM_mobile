@@ -1,5 +1,7 @@
 package com.intellisoft.myapplication.network_request.interfaces
 
+import com.intellisoft.myapplication.data_class.DbBardRequest
+import com.intellisoft.myapplication.data_class.DbBardResponse
 import com.intellisoft.myapplication.data_class.DbLLM
 import com.intellisoft.myapplication.data_class.DbLLMResponse
 import com.intellisoft.myapplication.data_class.DbProfile
@@ -39,12 +41,6 @@ interface Interface {
     ): Response<Any>
 
 
-    @POST("api/llm/askChatGpt")
-    suspend fun requestLLMChat(
-        @Header("Authorization") token: String, // Add this line to pass the Bearer Token
-        @Body dbLLM: DbLLM
-    ): Response<DbLLMResponse>
-
     @PUT("api/llm/updateMetaData/{phoneNumber}")
     suspend fun updateMetaData(
         @Header("Authorization") token: String, // Add this line to pass the Bearer Token
@@ -52,6 +48,18 @@ interface Interface {
         @Path("phoneNumber") phoneNumber: String,
     ): Response<Any>
 
+
+    @POST("api/llm/askChatGpt")
+    suspend fun requestLLMChat(
+        @Header("Authorization") token: String, // Add this line to pass the Bearer Token
+        @Body dbLLM: DbLLM
+    ): Response<DbLLMResponse>
+
+    @POST("api/llm/askGoogle")
+    suspend fun requestLLMChatBard(
+        @Header("Authorization") token: String, // Add this line to pass the Bearer Token
+        @Body dbBardRequest: DbBardRequest
+    ): Response<DbBardResponse>
 
 
 

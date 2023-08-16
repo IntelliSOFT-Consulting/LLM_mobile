@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import com.intellisoft.myapplication.landing_page.MainActivity
 import com.intellisoft.myapplication.auth.SignIn
+import com.intellisoft.myapplication.data_class.DbBardRequest
 import com.intellisoft.myapplication.data_class.DbLLM
 import com.intellisoft.myapplication.data_class.DbProfile
 import com.intellisoft.myapplication.data_class.DbSignIn
@@ -260,6 +261,44 @@ class RetrofitCallsAuthentication {
                     val choices = body.choices
                     for (choice in choices) {
                         return choice.message.content
+                    }
+                }
+            }
+
+        }catch (e: java.lang.Exception){
+            e.printStackTrace()
+        }
+        return null
+    }
+
+
+    fun requestLLMChatBard(context: Context, dbBardRequest: DbBardRequest) = runBlocking{
+        startRequestLLMChatBard(context, dbBardRequest)
+    }
+    private suspend fun startRequestLLMChatBard(context: Context, dbBardRequest: DbBardRequest): String?{
+        val formatter = FormatterClassHelper()
+        val baseUrl = context.getString(UrlData.BASE_URL.message)
+        val apiService = RetrofitBuilder.getRetrofit(baseUrl).create(Interface::class.java)
+        try {
+
+            val registrationToken = formatter.retrieveSharedPreference(context, "token")
+            var token = ""
+            if (registrationToken != null){
+                token = registrationToken
+            }
+
+            val apiInterface = apiService.requestLLMChatBard(token, dbBardRequest)
+            if (apiInterface.isSuccessful){
+                val statusCode = apiInterface.code()
+                val body = apiInterface.body()
+                if (statusCode == 200 && body !=null){
+                    val choices = body.choices
+                    for (choice in choices) {
+                        val contentList = choice.content
+                        if (contentList.isNotEmpty()){
+                            return contentList[0]
+                        }
+                        return null
                     }
                 }
             }

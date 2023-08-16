@@ -6,7 +6,15 @@ import java.time.LocalDateTime
 enum class UrlData(var message: Int) {
     BASE_URL(R.string.base_url),
 }
-
+data class DbBardResponse(
+    val choices: List<DbContent>,
+)
+data class DbContent(
+    val content:List<String>
+)
+data class DbBardRequest(
+    val inputText:String
+)
 data class DbUpdateMetadata(
     val searchSubject: String,
     val observedTimeStartUse: String,
