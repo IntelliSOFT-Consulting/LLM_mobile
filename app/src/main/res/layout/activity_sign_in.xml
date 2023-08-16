@@ -123,6 +123,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
+                    android:visibility="invisible"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:layout_marginStart="5dp"

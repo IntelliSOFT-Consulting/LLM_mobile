@@ -29,7 +29,7 @@ class SignUp2 : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     private lateinit var spinnerLocation: Spinner
 
-    private var location: String? = ""
+    private var location: String = ""
 
     private var formatterHelper = FormatterClassHelper()
     private var retrofitCallsAuthentication = RetrofitCallsAuthentication()
@@ -67,7 +67,10 @@ class SignUp2 : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     dbSignUp.password = password
                     dbSignUp.roles = rolesList
 
-                    val age = dbSignUp.age.toInt()
+                    dbSignUp.location = location
+                    dbSignUp.specificLocation = specificLocation
+
+                    val age = dbSignUp.age
                     dbSignUp.age = age
 
                     retrofitCallsAuthentication.registerUser(this, dbSignUp)

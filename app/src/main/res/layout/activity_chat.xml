@@ -90,6 +90,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 
+                    <TextView
+                        android:textStyle="italic|bold"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:text="(Be specific with the question)"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
 
                 </LinearLayout>
 

@@ -5,15 +5,13 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import com.intellisoft.myapplication.R
-import com.intellisoft.myapplication.chat.Chat
 import com.intellisoft.myapplication.data_class.DbUpdateMetadata
 import com.intellisoft.myapplication.network_request.requests.RetrofitCallsAuthentication
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.time.Duration
 import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Date
@@ -28,24 +26,21 @@ class FormatterClassHelper {
 
         val retrofitCallsAuthentication = RetrofitCallsAuthentication()
 
-        val observedTimeLastUseString = getLocalTime().toString()
+        val observedTimeLastUseString = getLocalTime()
         val observedTimeStartUseString = retrieveSharedPreference(context, "observedTimeStartUse")
+
         val searchSubject = retrieveSharedPreference(context, "searchSubject")
 
         if (observedTimeStartUseString != null && searchSubject != null){
 
-            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS")
-
-            val observedTimeLastUse = LocalDateTime.parse(observedTimeLastUseString, formatter)
-            val observedTimeStartUse = LocalDateTime.parse(observedTimeStartUseString, formatter)
-
-            val duration = Duration.between(observedTimeStartUse, observedTimeLastUse)
+            val duration =
+                getDuration(observedTimeStartUseString, observedTimeLastUseString)
 
             val dbUpdateMetadata = DbUpdateMetadata(
                 searchSubject,
                 observedTimeStartUseString,
                 observedTimeLastUseString,
-                duration.toHours().toString())
+                duration)
             retrofitCallsAuthentication.updateMetadata(context, dbUpdateMetadata)
 
         }
@@ -54,16 +49,41 @@ class FormatterClassHelper {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun getLocalTime(): LocalDateTime {
-        return LocalDateTime.now()
+    fun getDuration(startUseTime: String, lastUseTime:String):String{
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        val timestamp1 = LocalDateTime.parse(lastUseTime, formatter)
+        val timestamp2 = LocalDateTime.parse(startUseTime, formatter)
+
+        val duration = Duration.between(timestamp2, timestamp1)
+
+        val days = duration.toDays()
+        val hours = duration.toHours()
+        val minutes = duration.toMinutes()
+
+        return "$hours hour $minutes minutes"
+
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getLocalTime(): String {
+        val zoneId = ZoneId.of("Africa/Nairobi")
+        val now = ZonedDateTime.now(zoneId)
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        return now.format(formatter)
+    }
+
     fun getGreetingByTime(context: Context): String {
         val calendar = Calendar.getInstance()
 
         var name = ""
+        val fullName = retrieveSharedPreference(context, "fullName")
         val userName = retrieveSharedPreference(context, "username")
-        if (userName != null){
+        if (fullName != null && fullName != ""){
+            name = fullName
+        }else if (userName != null && userName != ""){
             name = userName
+        }else{
+            ""
         }
 
         return when (calendar.get(Calendar.HOUR_OF_DAY)) {

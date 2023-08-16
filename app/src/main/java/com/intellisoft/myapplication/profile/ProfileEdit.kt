@@ -68,13 +68,23 @@ class ProfileEdit : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         heardAppFrom = formatterHelper.retrieveSharedPreference(this,"heardAppFrom").toString()
         contact = formatterHelper.retrieveSharedPreference(this,"contact").toString()
         age = formatterHelper.retrieveSharedPreference(this,"age").toString()
-        username = formatterHelper.retrieveSharedPreference(this,"username").toString()
+
+        val fullName = formatterHelper.retrieveSharedPreference(this, "fullName")
+        val userName = formatterHelper.retrieveSharedPreference(this, "username")
+        if (fullName != null){
+            username = fullName
+        }else if (userName != null){
+            username = userName
+        }else{
+            ""
+        }
 
         val genderValue = formatterHelper.retrieveSharedPreference(this,"gender")
 
         etAge.setText(age)
         etPhoneNumber.setText(contact)
         etEmailAddress.setText(username)
+//        spinnerGender.setSelection(1)
 
 
     }

@@ -88,7 +88,7 @@ class Chat : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun updateMetadata() {
         val localDateTime = formatterHelper.getLocalTime()
-        formatterHelper.saveSharedPreference(this, "observedTimeStartUse", localDateTime.toString())
+        formatterHelper.saveSharedPreference(this, "observedTimeStartUse", localDateTime)
     }
 
     private fun setVisibility(isSend: Boolean){
@@ -141,8 +141,8 @@ class Chat : AppCompatActivity() {
             dbMessagesList.add(dbMessages)
 
             val dbLLM = DbLLM(
-//                    phoneNumber,
-//                    searchSubject,
+                phoneNumber,
+                searchSubject,
                 dbMessagesList)
 
             addList(DbChat(username, message))

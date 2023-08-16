@@ -45,7 +45,7 @@ interface Interface {
         @Body dbLLM: DbLLM
     ): Response<DbLLMResponse>
 
-    @POST("api/llm/askChatGpt/updateMetaData/{phoneNumber}")
+    @PUT("api/llm/askChatGpt/updateMetaData/{phoneNumber}")
     suspend fun updateMetaData(
         @Header("Authorization") token: String, // Add this line to pass the Bearer Token
         @Body dbUpdateMetadata: DbUpdateMetadata,

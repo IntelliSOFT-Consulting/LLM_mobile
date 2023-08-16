@@ -31,8 +31,8 @@ data class DbMessage(
 )
 
 data class DbLLM(
-//    val phoneNumber:String,
-//    val searchSubject:String,
+    val phoneNumber:String,
+    val searchSubject:String,
     val messages : List<DbMessages>
 )
 data class DbMessages(
@@ -59,6 +59,11 @@ data class DbSignUp(
     var gender:String,
     var phoneNumber:String,
     var signUpDate:String,
+
+    var location:String,
+    var specificLocation:String,
+    var fullName:String,
+
     var heardAppFrom:String,
     var username:String, //this is the email address
     var password:String,
@@ -91,7 +96,11 @@ data class DbSignUpResponse(
     val accountNonExpired: Boolean,
     val accountNonLocked: Boolean,
     val credentialsNonExpired: Boolean,
-    val authorities: List<Authority>
+    val authorities: List<Authority>,
+
+    var location:String?,
+    var specificLocation:String?,
+    var fullName:String?,
 )
 
 data class Role(

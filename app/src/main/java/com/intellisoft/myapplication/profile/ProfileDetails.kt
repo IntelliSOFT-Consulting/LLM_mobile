@@ -45,6 +45,10 @@ class ProfileDetails : AppCompatActivity() {
 
         }
 
+        findViewById<LinearLayout>(R.id.linearPersonalInfo).setOnClickListener {
+            val intent = Intent(this, ProfileEdit::class.java)
+            startActivity(intent)
+        }
         findViewById<LinearLayout>(R.id.linearLocation).setOnClickListener {
             val intent = Intent(this, Location::class.java)
             startActivity(intent)

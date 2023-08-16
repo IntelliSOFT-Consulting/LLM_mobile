@@ -172,6 +172,10 @@ class RetrofitCallsAuthentication {
                                 val contact = body.contact
                                 val heardAppFrom = body.heardAppFrom
 
+                                val location = body.location
+                                val specificLocation = body.specificLocation
+                                val fullName = body.fullName
+
                                 formatter.saveSharedPreference(context, "token", tokenLogin)
                                 formatter.saveSharedPreference(context, "age", age.toString())
                                 formatter.saveSharedPreference(context, "gender", gender)
@@ -180,6 +184,11 @@ class RetrofitCallsAuthentication {
                                 formatter.saveSharedPreference(context, "contact", contact)
                                 formatter.saveSharedPreference(context, "heardAppFrom", heardAppFrom)
                                 formatter.saveSharedPreference(context, "isLoggedIn", "true")
+
+                                formatter.saveSharedPreference(context, "location", location ?:"")
+                                formatter.saveSharedPreference(context, "specificLocation", specificLocation ?:"")
+                                formatter.saveSharedPreference(context, "fullName", fullName ?:"")
+
 
                                 messageToast = "Login successful.."
 
@@ -442,13 +451,13 @@ class RetrofitCallsAuthentication {
                 try {
 
                     val registrationToken = formatter.retrieveSharedPreference(context, "token")
-                    val phoneNumber = formatter.retrieveSharedPreference(context, "contact")
+                    val phoneNumber = formatter.retrieveSharedPreference(context, "contact").toString()
                     var token = ""
                     if (registrationToken != null){
                         token = registrationToken
                     }
 
-                    val apiInterface = apiService.updateMetaData(token, dbUpdateMetadata, phoneNumber.toString())
+                    val apiInterface = apiService.updateMetaData(token, dbUpdateMetadata, phoneNumber.trimEnd())
                     if (apiInterface.isSuccessful){
 
 
@@ -456,15 +465,15 @@ class RetrofitCallsAuthentication {
                         val statusCode = apiInterface.code()
                         if (statusCode == 401){
 
-                            CoroutineScope(Dispatchers.Main).launch {
-                                Toast.makeText(context,"Please login.. Your session has expired",Toast.LENGTH_SHORT).show()
-                                val intent = Intent(context, SignIn::class.java)
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                context.startActivity(intent)
-                                if (context is Activity) {
-                                    context.finish()
-                                }
-                            }
+//                            CoroutineScope(Dispatchers.Main).launch {
+//                                Toast.makeText(context,"Please login.. Your session has expired",Toast.LENGTH_SHORT).show()
+//                                val intent = Intent(context, SignIn::class.java)
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+//                                context.startActivity(intent)
+//                                if (context is Activity) {
+//                                    context.finish()
+//                                }
+//                            }
 
 
                         }

@@ -73,6 +73,9 @@ class SignUp1 : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                         phoneNumber,
                         todayDate,
                         "",
+                        "",
+                        fullName,
+                        "",
                         emailAddress,
                         "",
                         Collections.emptyList())
