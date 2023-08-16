@@ -58,20 +58,37 @@ class MainActivity : AppCompatActivity() {
 
     private fun processImages() {
 
-        val dbNCDsList = ArrayList<DbNCDs>()
-
-        val dbNCDsRun = DbNCDs(R.drawable.running, "Running")
-        val dbNCDsDiet = DbNCDs(R.drawable.food, "Diet")
-        val dbNCDsSmoking = DbNCDs(R.drawable.smoking, "Smoking and Drugs")
-        val dbNCDsHeart = DbNCDs(R.drawable.heart, "Heart")
-        val dbNCDsStress = DbNCDs(R.drawable.stress, "Stress")
-
-        dbNCDsList.addAll(mutableListOf(
-            dbNCDsRun, dbNCDsDiet, dbNCDsSmoking, dbNCDsHeart, dbNCDsStress))
-
+        val dbNCDsList = getNcds("en")
 
         val chatAdapter = MainActivityAdapter(dbNCDsList, this)
         recyclerView.adapter = chatAdapter
 
+    }
+
+    private fun getNcds(type:String):ArrayList<DbNCDs> {
+        val dbNCDsList = ArrayList<DbNCDs>()
+        val dbNCDStringList = listOf<String>(
+            "Being Physically Active",
+            "Choosing Healthy Diets",
+            "Saying No to Tobacco",
+            "Reducing Use of Alcohol",
+            "Beating Tobacco and Unhealthy foods",
+            "Promoting Physical Activity",
+            "Universal Health Coverage",
+            "Promoting Cleaner cities",
+            "Educating Children",
+            "Promoting Regulation",
+        )
+
+        for (i in 1..10) {
+
+            val drawableResName = "en$i"
+            val drawableResId = resources.getIdentifier(drawableResName, "drawable", packageName)
+            val dbNCD = DbNCDs(drawableResId, dbNCDStringList[i - 1])
+            dbNCDsList.add(dbNCD)
+
+        }
+
+        return dbNCDsList
     }
 }

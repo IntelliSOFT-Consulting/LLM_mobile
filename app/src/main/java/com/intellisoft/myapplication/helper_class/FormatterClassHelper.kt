@@ -1,6 +1,7 @@
 package com.intellisoft.myapplication.helper_class
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
@@ -156,13 +157,12 @@ class FormatterClassHelper {
 
     fun logOut(context: Context) {
 
-        deleteSharedPreference(context, "token")
-        deleteSharedPreference(context, "age")
-        deleteSharedPreference(context, "gender")
-        deleteSharedPreference(context, "username")
-        deleteSharedPreference(context, "signUpDate")
-        deleteSharedPreference(context, "contact")
-        deleteSharedPreference(context, "isLoggedIn")
+        val appName = context.getString(R.string.app_name)
+        val sharedPreferences = context.getSharedPreferences(appName, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.apply()
+
 
     }
 
