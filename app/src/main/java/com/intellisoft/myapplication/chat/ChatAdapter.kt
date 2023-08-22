@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.intellisoft.myapplication.R
@@ -18,13 +19,25 @@ class ChatAdapter(private val dbChatList: ArrayList<DbChat>):
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
 
         val tvUsername: TextView
-        val tvChat: TextView
-        val linearLayout: LinearLayout
+
+        val tvChatUser: TextView
+        val linearLayoutUser: LinearLayout
+        val cardViewUser: CardView
+
+        val tvChatAi: TextView
+        val linearLayoutAi: LinearLayout
+        val cardViewAi: CardView
 
         init {
             tvUsername = view.findViewById(R.id.tvUsername)
-            tvChat = view.findViewById(R.id.tvChat)
-            linearLayout = view.findViewById(R.id.linearLayout)
+
+            tvChatUser = view.findViewById(R.id.tvChatUser)
+            linearLayoutUser = view.findViewById(R.id.linearLayoutUser)
+            cardViewUser = view.findViewById(R.id.cardViewUser)
+
+            tvChatAi = view.findViewById(R.id.tvChatAi)
+            linearLayoutAi = view.findViewById(R.id.linearLayoutAi)
+            cardViewAi = view.findViewById(R.id.cardViewAi)
         }
 
     }
@@ -45,12 +58,23 @@ class ChatAdapter(private val dbChatList: ArrayList<DbChat>):
         val chat = dbChatList[position].chat
 
         holder.tvUsername.text = username
-        holder.tvChat.text = chat
 
-        if (username.contains("AI")){
-            holder.linearLayout.setBackgroundColor(Color.rgb(237,240,247))
-            holder.tvChat.setTextColor(Color.BLACK)
+        if (username == "AI"){
+
+            holder.cardViewAi.visibility = View.VISIBLE
+            holder.cardViewUser.visibility = View.GONE
+
+            holder.tvChatAi.text = chat
+
+        }else{
+
+            holder.cardViewAi.visibility = View.GONE
+            holder.cardViewUser.visibility = View.VISIBLE
+
+            holder.tvChatUser.text = chat
+
         }
+
 
 
 

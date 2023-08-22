@@ -76,7 +76,7 @@ class SignUp1 : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                         "",
                         fullName,
                         "",
-                        emailAddress,
+                        emailAddress.trimEnd(),
                         "",
                         Collections.emptyList())
 

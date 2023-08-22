@@ -30,7 +30,7 @@ class SignIn : AppCompatActivity() {
 
         findViewById<Button>(R.id.btnSendCode).setOnClickListener {
 
-            val emailAddress = etEmailAddress.text.toString()
+            val emailAddress = etEmailAddress.text.toString().trimEnd()
             val password = etPassword.text.toString()
 
             if (!TextUtils.isEmpty(emailAddress) && !TextUtils.isEmpty(password)){

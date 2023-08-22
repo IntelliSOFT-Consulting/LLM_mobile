@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Llm</string>
 
-    <string name="base_url">http://192.168.215.120:8090/</string>
+    <string name="base_url">http://192.168.215.222:8090/</string>
 
 
     <string name="sign_up">Enter your information to get your account ready.</string>
