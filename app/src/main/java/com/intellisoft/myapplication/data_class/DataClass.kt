@@ -1,21 +1,88 @@
 package com.intellisoft.myapplication.data_class
 
 import com.intellisoft.myapplication.R
+import java.time.LocalDateTime
 
 enum class UrlData(var message: Int) {
     BASE_URL(R.string.base_url),
 }
+data class DbBardResponse(
+    val choices: List<DbContent>,
+)
+data class DbContent(
+    val content:List<String>
+)
+data class DbBardRequest(
+    val inputText:String
+)
+data class DbUpdateMetadata(
+    val searchSubject: String,
+    val observedTimeStartUse: String,
+    val observedTimeLastUse: String,
+    val durationOfEngagement: String,
+)
+
+data class DbNCDs(
+    val imageResource: Int,
+    val imageName: String
+)
+
+data class DbLLMResponse(
+    val choices:List<DbChoices>
+)
+data class DbChoices(
+    val message: DbMessage
+)
+data class DbMessage(
+    val role: String,
+    val content: String
+)
+
+data class DbLLM(
+    val phoneNumber:String,
+    val searchSubject:String,
+    val messages : List<DbMessages>
+)
+data class DbMessages(
+    val role:String,
+    val content:String,
+)
+data class DbNcd(
+    val imageSource: Int,
+    val imageName:String
+)
+data class DbChat(
+    val username: String,
+    val chat: String
+)
+
+data class DbSignIn(
+    val username:String,
+    val password:String,
+)
 
 data class DbSignUp(
-    val uniqueID:String,
-    val age:String,
-    val gender:String,
-    val phoneNumber:String,
-    val signUpDate:String,
-    val heardAppFrom:String,
-    val username:String, //this is the email address
-    val password:String,
-    val roles:List<DbRoles>,
+    var uniqueID:String,
+    var age:Int,
+    var gender:String,
+    var phoneNumber:String,
+    var signUpDate:String,
+
+    var location:String,
+    var specificLocation:String,
+    var fullName:String,
+
+    var heardAppFrom:String,
+    var username:String, //this is the email address
+    var password:String,
+    var roles:List<DbRoles>,
+)
+data class DbProfile(
+    var age:Int,
+    var gender:String,
+    var contact:String,
+    var heardAppFrom:String,
+    var phoneNumber:String
 )
 data class DbRoles(
     val name:String
@@ -37,7 +104,11 @@ data class DbSignUpResponse(
     val accountNonExpired: Boolean,
     val accountNonLocked: Boolean,
     val credentialsNonExpired: Boolean,
-    val authorities: List<Authority>
+    val authorities: List<Authority>,
+
+    var location:String?,
+    var specificLocation:String?,
+    var fullName:String?,
 )
 
 data class Role(

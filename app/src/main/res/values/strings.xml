@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Llm</string>
 
-    <string name="base_url">https://devhmis.intellisoftkenya.com/api/</string>
+    <string name="base_url">http://198.74.52.186:8090/</string>
 
 
     <string name="sign_up">Enter your information to get your account ready.</string>
@@ -19,6 +19,13 @@
         <item>University</item>
         <item>Mall</item>
         <item>Market</item>
+    </string-array>
+
+    <string-array name="array_hear_us">
+        <item>Through Study</item>
+        <item>Social Media</item>
+        <item>IntelliSoft website</item>
+        <item>Referral by a friend</item>
     </string-array>
 
 </resources>

@@ -67,7 +67,7 @@
                 <TextView
                     android:textStyle="bold"
                     android:layout_marginStart="5dp"
-                    android:text="Phone number "
+                    android:text="Email Address "
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -83,9 +83,10 @@
 
 
             <EditText
-                android:inputType="number"
+                android:id="@+id/etEmailAddress"
+                android:inputType="textEmailAddress"
                 android:layout_marginTop="5dp"
-                android:hint="+254 707 707 707"
+                android:hint="Enter your email address"
                 android:background="@drawable/edit_text_border"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -122,6 +123,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
+                    android:visibility="invisible"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:layout_marginStart="5dp"
@@ -132,6 +134,7 @@
             </LinearLayout>
 
             <EditText
+                android:id="@+id/etPassword"
                 android:inputType="textPassword"
                 android:layout_marginTop="5dp"
                 android:hint="Enter your password"
@@ -149,11 +152,12 @@
             android:layout_height="wrap_content">
 
             <Button
+                android:textAllCaps="false"
                 android:id="@+id/btnSendCode"
                 android:layout_marginTop="20dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:backgroundTint="@color/button"
-                android:text="Send Code"
+                android:text="Login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
