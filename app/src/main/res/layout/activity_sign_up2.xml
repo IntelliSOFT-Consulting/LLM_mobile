@@ -178,13 +178,14 @@
 
                 </LinearLayout>
 
-                <EditText
-                    android:id="@+id/etAboutUs"
+                <Spinner
                     android:layout_marginTop="5dp"
-                    android:hint="How did you get to learn about the app?"
                     android:background="@drawable/edit_text_border"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:id="@+id/spinnerHearUs"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:drawSelectorOnTop="true"
+                    android:entries="@array/array_location" />
 
             </LinearLayout>
 

@@ -74,13 +74,10 @@ class MainActivity : AppCompatActivity() {
             "Reducing Use of Alcohol",
             "Beating Tobacco and Unhealthy foods",
             "Promoting Physical Activity",
-            "Universal Health Coverage",
-            "Promoting Cleaner cities",
-            "Educating Children",
             "Promoting Regulation",
         )
 
-        for (i in 1..10) {
+        for (i in 1..7) {
 
             val drawableResName = "en$i"
             val drawableResId = resources.getIdentifier(drawableResName, "drawable", packageName)

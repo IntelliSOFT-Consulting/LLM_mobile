@@ -26,6 +26,7 @@ class SignUp1 : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private lateinit var etPhoneNumber:EditText
     private lateinit var etAge:EditText
     private lateinit var etEmailAddress:EditText
+    private lateinit var etUniqueId:EditText
 
     private lateinit var spinnerGender:Spinner
 
@@ -41,6 +42,7 @@ class SignUp1 : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         etPhoneNumber = findViewById(R.id.etPhoneNumber)
         etAge = findViewById(R.id.etAge)
         etEmailAddress = findViewById(R.id.etEmailAddress)
+        etUniqueId = findViewById(R.id.etUniqueId)
 
 
         initSpinner()
@@ -55,6 +57,9 @@ class SignUp1 : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             val phoneNumber = etPhoneNumber.text.toString()
             val age = etAge.text.toString()
             val emailAddress = etEmailAddress.text.toString()
+            var uniqueId = etUniqueId.text.toString()
+
+            if (TextUtils.isEmpty(uniqueId)) uniqueId = phoneNumber
 
             if (!TextUtils.isEmpty(fullName) &&
                 !TextUtils.isEmpty(phoneNumber) &&
@@ -67,7 +72,7 @@ class SignUp1 : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     val todayDate = formatterHelper.getTodayDate()
 
                     val dbSignUp = DbSignUp(
-                        phoneNumber,
+                        uniqueId,
                         age.toInt(),
                         gender.toString(),
                         phoneNumber,
