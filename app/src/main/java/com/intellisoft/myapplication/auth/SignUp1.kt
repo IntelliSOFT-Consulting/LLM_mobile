@@ -103,7 +103,7 @@ class SignUp1 : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
                 if (TextUtils.isEmpty(fullName)) etFullName.error = "Enter your name"
                 if (TextUtils.isEmpty(phoneNumber)) etPhoneNumber.error = "Enter your phone number"
-
+                if (TextUtils.isEmpty(dob)) etDob.error = "Enter your dob"
                 if (TextUtils.isEmpty(emailAddress)) etEmailAddress.error = "Enter your email address"
                 if (gender == "") Toast.makeText(this, "Please select your gender", Toast.LENGTH_LONG).show()
 

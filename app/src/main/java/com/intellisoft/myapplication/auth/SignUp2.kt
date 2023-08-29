@@ -68,8 +68,8 @@ class SignUp2 : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     dbSignUp.location = location
                     dbSignUp.specificLocation = specificLocation
 
-                    val age = dbSignUp.age
-                    dbSignUp.age = age
+                    val age = dbSignUp.dob
+                    dbSignUp.dob = age
 
                     retrofitCallsAuthentication.registerUser(this, dbSignUp)
 

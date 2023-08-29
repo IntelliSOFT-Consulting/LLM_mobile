@@ -263,8 +263,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/edit_text_border"
-                    android:hint="yyyy-MM-dd"
-                    android:maxLength="2" />
+                    android:hint="yyyy-MM-dd" />
 
             </LinearLayout>
 
