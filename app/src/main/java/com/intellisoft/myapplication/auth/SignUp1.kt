@@ -24,7 +24,7 @@ class SignUp1 : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     private lateinit var etFullName:EditText
     private lateinit var etPhoneNumber:EditText
-    private lateinit var etAge:EditText
+    private lateinit var etDob:EditText
     private lateinit var etEmailAddress:EditText
     private lateinit var etUniqueId:EditText
 
@@ -40,7 +40,7 @@ class SignUp1 : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         etFullName = findViewById(R.id.etFullName)
         etPhoneNumber = findViewById(R.id.etPhoneNumber)
-        etAge = findViewById(R.id.etAge)
+        etDob = findViewById(R.id.etDob)
         etEmailAddress = findViewById(R.id.etEmailAddress)
         etUniqueId = findViewById(R.id.etUniqueId)
 
@@ -55,25 +55,26 @@ class SignUp1 : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
             val fullName = etFullName.text.toString()
             val phoneNumber = etPhoneNumber.text.toString()
-            val age = etAge.text.toString()
+            val dob = etDob.text.toString()
             val emailAddress = etEmailAddress.text.toString()
             var uniqueId = etUniqueId.text.toString()
 
-            if (TextUtils.isEmpty(uniqueId)) uniqueId = phoneNumber
-
             if (!TextUtils.isEmpty(fullName) &&
                 !TextUtils.isEmpty(phoneNumber) &&
-                !TextUtils.isEmpty(age) &&
+                !TextUtils.isEmpty(dob) &&
                 !TextUtils.isEmpty(emailAddress) &&
                 gender != ""){
 
-                if (formatterHelper.validateEmail(emailAddress)){
+                if (formatterHelper.validateEmail(emailAddress) &&
+                    formatterHelper.isValidDateFormat(dob)){
+
+                    if (TextUtils.isEmpty(uniqueId)) uniqueId = formatterHelper.getUniqueId(dob, fullName)
 
                     val todayDate = formatterHelper.getTodayDate()
 
                     val dbSignUp = DbSignUp(
                         uniqueId,
-                        age.toInt(),
+                        dob,
                         gender.toString(),
                         phoneNumber,
                         todayDate,
@@ -92,7 +93,8 @@ class SignUp1 : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     startActivity(intent)
 
                 }else{
-                    etEmailAddress.error = "Enter a valid email address"
+                    if (!formatterHelper.isValidDateFormat(dob)) etDob.error = "Date should be in format: yyyy-MM-dd"
+                    if (!formatterHelper.validateEmail(emailAddress)) etEmailAddress.error = "Enter a valid email address"
                 }
 
 
@@ -101,7 +103,7 @@ class SignUp1 : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
                 if (TextUtils.isEmpty(fullName)) etFullName.error = "Enter your name"
                 if (TextUtils.isEmpty(phoneNumber)) etPhoneNumber.error = "Enter your phone number"
-                if (TextUtils.isEmpty(age)) etAge.error = "Enter your age"
+
                 if (TextUtils.isEmpty(emailAddress)) etEmailAddress.error = "Enter your email address"
                 if (gender == "") Toast.makeText(this, "Please select your gender", Toast.LENGTH_LONG).show()
 

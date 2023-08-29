@@ -244,7 +244,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
-                        android:text="Age"
+                        android:text="Dob"
                         android:textStyle="bold" />
 
                     <TextView
@@ -258,13 +258,12 @@
                 </LinearLayout>
 
                 <EditText
-                    android:id="@+id/etAge"
+                    android:id="@+id/etDob"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/edit_text_border"
-                    android:hint="18"
-                    android:inputType="number"
+                    android:hint="yyyy-MM-dd"
                     android:maxLength="2" />
 
             </LinearLayout>

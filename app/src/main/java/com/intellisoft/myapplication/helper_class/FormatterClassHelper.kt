@@ -10,10 +10,12 @@ import com.intellisoft.myapplication.data_class.DbUpdateMetadata
 import com.intellisoft.myapplication.network_request.requests.RetrofitCallsAuthentication
 import java.text.SimpleDateFormat
 import java.time.Duration
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
@@ -164,6 +166,43 @@ class FormatterClassHelper {
         editor.apply()
 
 
+    }
+
+    fun isValidDateFormat(input: String): Boolean {
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        return try {
+            LocalDate.parse(input, formatter)
+            true
+        } catch (e: DateTimeParseException) {
+            false
+        }
+    }
+
+    private fun getInitialsFromName(name: String): String {
+        val names = name.split(" ")
+        val initials = names.mapNotNull { it.firstOrNull()?.toUpperCase() }
+        return initials.joinToString("")
+    }
+
+    private fun getYearFromDate(dateString: String): Int? {
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        return try {
+            val date = LocalDate.parse(dateString, formatter)
+            date.year
+        } catch (e: DateTimeParseException) {
+            null
+        }
+    }
+
+    fun getUniqueId(dateString: String, name: String):String{
+        val year = getYearFromDate(dateString)
+        val initials = getInitialsFromName(name)
+
+        if (year != null) {
+           return "$name$initials"
+        }
+
+        return name
     }
 
 }

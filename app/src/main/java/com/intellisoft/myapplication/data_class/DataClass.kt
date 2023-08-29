@@ -63,7 +63,7 @@ data class DbSignIn(
 
 data class DbSignUp(
     var uniqueID:String,
-    var age:Int,
+    var dob:String,
     var gender:String,
     var phoneNumber:String,
     var signUpDate:String,
