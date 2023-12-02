@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Llm</string>
+    <string name="app_name1">Afya AI</string>
 
-    <string name="base_url">http://198.74.52.186:8090/</string>
-
+    <string name="base_url">http://170.187.182.222:8090/</string>
 
     <string name="sign_up">Enter your information to get your account ready.</string>
     <string name="sign_in">Enter your phone number to sign in, we\'ll send you a code for verification.</string>
