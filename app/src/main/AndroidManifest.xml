@@ -50,7 +50,7 @@
         <activity
             android:name=".landing_page.Splash"
             android:exported="true"
-            android:theme="@style/Theme.Design.Light.NoActionBar" >
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -63,12 +63,12 @@
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".landing_page.MainActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false" >
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
     </application>
 

@@ -8,6 +8,10 @@
     <color name="button">#0067FE</color>
     <color name="text_color">#0B65C2</color>
     <color name="darker_gray">#14000000</color>
+    <color name="colorPrimary">#163C94</color>
+    <color name="colorGreen">#207724</color>
+    <color name="colorPrimaryDark">#163C94</color>
+    <color name="colorAccent">#163C94</color>
 </resources>
 
 
